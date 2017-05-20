@@ -22,7 +22,7 @@ function afterLoad() {
     	console.log(students[i]._id);
     	$("#studentsTable").append("<tr><td class='studentsId'>"+students[i]._id+"</td><td>"+students[i].name+"</td></tr>");
     }
-    $(".studentsId").click(function(){
+    $("#studentsTable").on("click", ".studentsId", function(){
     	var studentId = $(this).text();
     	console.log(studentId)
 
@@ -40,3 +40,20 @@ function afterLoad() {
 }
 
 setTimeout(afterLoad, 500);
+
+
+function addData(){
+	var name = $("#newName").val();
+	var age =  $("#newAge").val();
+	var newStudent = {
+	    name: name,
+	    age: age
+	};
+	studentCollection.insert(newStudent);
+	studentCollection.save();
+	var student = studentCollection.find(newStudent)[0];
+	console.log(student);
+
+	$("#studentsTable").append("<tr><td class='studentsId'>"+student._id+"</td><td>"+student.name+"</td></tr>");
+}
+$("#addData").click(addData);
