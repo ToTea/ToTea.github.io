@@ -13,12 +13,12 @@
 	<body>
 		<h1>這是DB</h1>
 		<div class="form-group">
-		  <label for="newName">Name:</label>
-		  <input type="text" class="form-control" id="newName">
+			<label for="newName">Name:</label>
+			<input type="text" class="form-control" id="newName">
 		</div>
 		<div class="form-group">
-		  <label for="newAge">Age:</label>
-		  <input type="text" class="form-control" id="newAge">
+			<label for="newAge">Age:</label>
+			<input type="text" class="form-control" id="newAge">
 		</div>
 		<button id="addData" class="btn btn-primary">新增資料</button>
 		<table class="table">
@@ -33,7 +33,10 @@
 				<tr>
 					<td>1</td>
 					<td>Orange</td>
-					<td><button class="deleteButton btn btn-danger">刪除</button></td>
+					<td>
+						<button class="updateButton btn btn-warning">修改</button>
+						<button class="deleteButton btn btn-danger">刪除</button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -51,6 +54,30 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">修改資料</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="newName">Name:</label>
+							<input type="text" class="form-control" id="updateName">
+						</div>
+						<div class="form-group">
+							<label for="newAge">Age:</label>
+							<input type="text" class="form-control" id="updateAge">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" id="updateSave">Save changes</button>
 					</div>
 				</div>
 			</div>

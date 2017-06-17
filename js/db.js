@@ -16,7 +16,7 @@ var studentCollection = db.collection('students');
 studentCollection.load()
 
 function createHTMLString(_id, name){
-	return "<tr><td>"+_id+"</td><td>"+name+"</td><td><button class='deleteButton btn btn-danger' data-id='"+_id+"'>刪除</button></td></tr>";
+	return "<tr><td class='studentsId'>"+_id+"</td><td>"+name+"</td><td><button class='updateButton btn btn-warning' data-id='"+_id+"'>修改</button> <button class='deleteButton btn btn-danger' data-id='"+_id+"'>刪除</button></td></tr>";
 }
 
 function afterLoad() {
@@ -74,3 +74,36 @@ function deleteData(){
 	$(this).parents("tr").remove()
 }
 $("#studentsTable").on("click", ".deleteButton", deleteData)
+
+function updateData(){
+	var studentId = $(this).attr("data-id");
+	console.log(studentId)
+
+	var query = {
+		_id: studentId
+	}
+	var student = studentCollection.find(query)[0];
+
+	$("#updateName").val(student.name);
+	$("#updateAge").val(student.age);
+	$("#updateSave").attr("data-id", studentId);
+
+	$("#updateModal").modal('show');
+}
+
+$("#studentsTable").on("click", ".updateButton", updateData)
+
+function updateSave(){
+	var studentId = $(this).attr("data-id");
+	var name = $("#updateName").val();
+	var age =  $("#updateAge").val();
+	var newStudent = {
+	    name: name,
+	    age: age
+	};
+	studentCollection.updateById(studentId, newStudent);
+	studentCollection.save();
+	$("#updateModal").modal('hide');
+}
+
+$("#updateSave").on("click", updateSave);
