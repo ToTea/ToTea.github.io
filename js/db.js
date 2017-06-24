@@ -107,3 +107,22 @@ function updateSave(){
 }
 
 $("#updateSave").on("click", updateSave);
+
+
+function search(){
+	var gtAge = $("#gtAge").val();
+	console.log(gtAge);
+
+	var students = studentCollection.find({
+    	age: {
+	        $gt: gtAge/1
+	    }
+	});
+	$("#studentsTable").find("tr").remove();
+	for (var i = 0; i < students.length; i++) {
+    	console.log(students[i]._id);
+    	$("#studentsTable").append(createHTMLString(students[i]._id, students[i].name));
+    }
+
+}
+$("#search").on("click", search);
