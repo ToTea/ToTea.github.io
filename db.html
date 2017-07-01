@@ -13,6 +13,8 @@
 	<body>
 		<h1>這是DB</h1>
 		年齡大於<input type="" name="" id="gtAge">
+		<input type="checkbox" name="" id="aClassCheckbox"> A班
+		<input type="checkbox" name="" id="bClassCheckbox"> B班
 		<button id="search">搜尋</button>
 		<div class="form-group">
 			<label for="newName">Name:</label>
@@ -21,6 +23,10 @@
 		<div class="form-group">
 			<label for="newAge">Age:</label>
 			<input type="text" class="form-control" id="newAge">
+		</div>
+		<div class="form-group">
+			<label for="newClass">Class:</label>
+			<input type="text" class="form-control" id="newClass">
 		</div>
 		<button id="addData" class="btn btn-primary">新增資料</button>
 		<table class="table">
@@ -52,6 +58,7 @@
 					<div class="modal-body">
 						<p>ID: <span id="studentsId"></span></p>
 						<p>年齡： <span id="studentsAge"></span></p>
+						<p>班級： <span id="studentsClass"></span></p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -75,6 +82,10 @@
 						<div class="form-group">
 							<label for="newAge">Age:</label>
 							<input type="text" class="form-control" id="updateAge">
+						</div>
+						<div class="form-group">
+							<label for="newClass">Class:</label>
+							<input type="text" class="form-control" id="updateClass">
 						</div>
 					</div>
 					<div class="modal-footer">
