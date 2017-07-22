@@ -2,6 +2,7 @@ var fdb = new ForerunnerDB();
 var db = fdb.db("myDB");
 
 var studentCollection = db.collection('students');
+var parentCollection = db.collection('parents');
 
 // for (var i = 0; i < 10; i++) {
 // 	var newStudent = {
@@ -13,10 +14,15 @@ var studentCollection = db.collection('students');
 // studentCollection.save()
 
 
-studentCollection.load()
+studentCollection.load();
+parentCollection.load();
 
 function createHTMLString(_id, name){
 	return "<tr><td class='studentsId'>"+_id+"</td><td>"+name+"</td><td><button class='updateButton btn btn-warning' data-id='"+_id+"'>修改</button> <button class='deleteButton btn btn-danger' data-id='"+_id+"'>刪除</button></td></tr>";
+}
+
+function createParentHTMLString(_id, name){
+	return "<option value='"+_id+"'>"+name+"</option>";
 }
 
 function afterLoad() {
@@ -25,6 +31,11 @@ function afterLoad() {
     for (var i = 0; i < students.length; i++) {
     	console.log(students[i]._id);
     	$("#studentsTable").append(createHTMLString(students[i]._id, students[i].name));
+    }
+    var parents = parentCollection.find();
+    for (var i = 0; i < parents.length; i++) {
+    	$("#parent-id").append(createParentHTMLString(parents[i]._id, parents[i].name));
+		$("#updateParent-id").append(createParentHTMLString(parents[i]._id, parents[i].name));
     }
     $("#studentsTable").on("click", ".studentsId", function(){
     	var studentId = $(this).text();
@@ -51,10 +62,12 @@ function addData(){
 	var name = $("#newName").val();
 	var age =  $("#newAge").val();
 	var newClass =  $("#newClass").val();
+	var parentID = $("#parent-id").val();
 	var newStudent = {
 	    name: name,
 	    age: age,
-	    class: newClass
+	    class: newClass,
+	    parentID: parentID
 	};
 	studentCollection.insert(newStudent);
 	studentCollection.save();
@@ -90,6 +103,7 @@ function updateData(){
 	$("#updateName").val(student.name);
 	$("#updateAge").val(student.age);
 	$("#updateClass").val(student.class);
+	$("#updateParent-id").val(student.parentID);
 	$("#updateSave").attr("data-id", studentId);
 
 	$("#updateModal").modal('show');
@@ -102,10 +116,12 @@ function updateSave(){
 	var name = $("#updateName").val();
 	var age =  $("#updateAge").val();
 	var newClass =  $("#updateClass").val();
+	var parentID = $("#updateParent-id").val();
 	var newStudent = {
 	    name: name,
 	    age: age,
-	    class: newClass
+	    class: newClass,
+	    parentID: parentID
 	};
 	studentCollection.updateById(studentId, newStudent);
 	studentCollection.save();
